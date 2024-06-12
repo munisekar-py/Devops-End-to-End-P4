@@ -1,11 +1,72 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const Payment = require('../models/payment.model');  
+const ProjectContent = require('../models/projectContent.model');
+const { sendDownloadLinkEmail, sendAllDownloadLinksEmail } = require('../utils/emailTemplates');
+
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET
 });
+
+
+const AWS = require('aws-sdk');
+const s3Client = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+});
+
+exports.streamContent = async (req, res) => {
+    const { key } = req.params; 
+    const userEmail = req.query.email;
+    const clientIP = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    try {
+        const projectContent = await ProjectContent.findOne({ projectId: key });
+        if (!projectContent) {
+            return res.status(404).send('Project content not found.');
+        }
+
+        // Update the Payment model with download count and IP
+        const updatedPayment = await Payment.findOneAndUpdate(
+            { userEmail: userEmail, projectId: key, paymentStatus: 'success' },
+            {
+                $inc: { downloadCount: 1 },
+                $push: { downloadIPs: clientIP }
+            },
+            { new: true }
+        );
+
+        if (!updatedPayment) {
+            return res.status(404).send('Payment record not found or download not authorized.');
+        }
+
+        // Set up the parameters to get the object from S3
+        const downloadParams = {
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: projectContent.downloadLink // Assuming this is the key in the S3 bucket
+        };
+
+        // Set response headers
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Disposition', 'attachment; filename=' + projectContent.downloadLink.split('/').pop());
+
+        // Stream the data from S3 to the response
+        const dataStream = s3Client.getObject(downloadParams).createReadStream();
+        dataStream.on('error', function(err) {
+            console.error("Error streaming file from S3", err);
+            res.status(500).send("Failed to download file");
+        });
+
+        dataStream.pipe(res);
+    } catch (error) {
+        console.error("Error in streaming content", error);
+        res.status(500).send("Failed to process download");
+    }
+};
+
 
 // Create an order
 exports.createOrder = async (req, res) => {
@@ -36,14 +97,7 @@ exports.createOrder = async (req, res) => {
 
 // Verify payment
 exports.verifyPayment = async (req, res) => {
-    console.log('Payment Verification Started: ', req.body)
-    const {
-        orderCreationId,
-        razorpayPaymentId,
-        razorpayOrderId,
-        razorpaySignature,
-        user
-    } = req.body;
+    const { orderCreationId, razorpayPaymentId, razorpayOrderId, razorpaySignature, user } = req.body;
 
     try {
         const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET);
@@ -58,23 +112,55 @@ exports.verifyPayment = async (req, res) => {
             userEmail: user.email,
             userPhone: user.phone,
             amountPaid: user.amount,
-            projectId: user.projectId, 
+            projectId: user.projectId,
             razorpayPaymentId,
             razorpayOrderId,
             razorpaySignature,
             paymentStatus: 'success',
-            paymentDateTime: new Date(),
-            downloadIPs: [] 
+            paymentDateTime: new Date()
         });
 
-        res.json({
-            msg: 'success',
-            orderId: razorpayOrderId,
-            paymentId: razorpayPaymentId,
-            paymentRecordId: newPayment._id
-        });
+        // Fetch the download link
+        const projectContent = await ProjectContent.findOne({ projectId: user.projectId });
+
+        if (projectContent) {
+            await sendDownloadLinkEmail(user.email, projectContent.downloadLink);
+            res.json({
+                msg: 'success',
+                orderId: razorpayOrderId,
+                paymentId: razorpayPaymentId,
+                paymentRecordId: newPayment._id,
+                downloadLink: projectContent.downloadLink
+            });
+        } else {
+            res.status(404).send({ message: "Download link not found for this project." });
+        }
     } catch (error) {
         console.error('Payment verification failed:', error);
         res.status(500).send(error);
+    }
+};
+
+
+exports.sendAllDownloadLinks = async (req, res) => {
+    const userEmail = req.body.email;
+
+    try {
+        // Fetch all successful payment entries for the user
+        const payments = await Payment.find({ userEmail: userEmail, paymentStatus: 'success' });
+
+        // Extract project IDs from payments
+        const projectIds = payments.map(payment => payment.projectId.toString());
+
+        if (projectIds.length > 0) {
+            // Pass the project IDs to the email function
+            await sendAllDownloadLinksEmail(userEmail, projectIds);
+            res.json({ message: "Download links sent successfully!" });
+        } else {
+            res.status(404).json({ message: "No projects found for this user." });
+        }
+    } catch (error) {
+        console.error('Error sending download links:', error);
+        res.status(500).send({ error: "Error retrieving or sending download links." });
     }
 };
