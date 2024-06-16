@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Course Details V.2 – Collab – Online Learning Platform Template</title>
+    <title>Project Downloader</title>
     <link rel="shortcut icon" href="assets/images/logo/favourite_icon_1.svg">
 
     <!-- Framework - CSS Include -->
@@ -84,420 +84,116 @@
                   <ul class="breadcrumb_nav unordered_list">
                     <li><a href="index.html">Home</a></li>
             
-                    <li>Course Details</li>
+                    <li>Project Details</li>
                   </ul>
-                  <h1 class="page_title">
-                    Java Programming and Software Engineering
-                  </h1>
-                  <ul class="info_list unordered_list_block pb-0">
-                    <li>
-                      <i class="fas fa-check"></i>
-                      <span>
-                        Fermentum iaculis eu non diam phasellus vestibulum. Porta non pulvinar neque laoreet suspendisse. Justo nec ultrices dui sapien proin sed libero
-                      </span>
-                    </li>
-                    <li>
-                      <i class="fas fa-check"></i>
-                      <span>
-                        At consectetur lorem donec massa sapien. Pulvinar sapien et ligula ullamcorper malesuada proin
-                      </span>
-                    </li>
-                  </ul>
+                  <div id="projectsDetails"> 
+                    <h1 class="page_title" id="projectTitle">
+                      
+                    </h1>
+                    <ul class="info_list unordered_list_block pb-0">
+                      <li>
+                        <i class="fas fa-check"></i>
+                        <span id="projectDescription">
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <!-- Page Section - End
-        ================================================== -->
+          </section>
+          <!-- Page Section - End
+          ================================================== -->
+  
+          <!-- Course Details Section - Start
+          ================================================== -->
+          <section class="details_section course_details_section">
+            <div class="container">
+              <div class="row">
+                <div class="col col-lg-8">
+                  <div class="section_space_lg pb-lg-0">
+                    <div class="pe-lg-5">
+                      <div class="course_info_card d-lg-none">
+                        <div class="details_image" id="projectImage">
+                          
+                        </div>                        
+                        <div class="item_price">
+                          <span class="sale_price" id="price1"></span>
+                        </div>
+                        <div id="buy2"></div>
+                        <!-- <a href="pricing.html" class="btn btn_dark"> -->
+                          <!-- <span>
+                            <small>Buy Now</small>
+                            <small>Buy Now</small>
+                          </span> -->
+                        </a>
+                        <ul class="course_info_list unordered_list_block">                          
+                          <li>
+                            <span><i class="fas fa-clock"></i> Duration</span>
+                            <strong id="duration1"></strong>
+                          </li>
+                          <li>
+                            <span><i class="fas fa-video"></i> Projects</span>
+                            <strong id="project1"></strong>
+                          </li>
+                         
+                        </ul>
+                      </div>
+  
+                      <div class="section_heading">
+                        <h2 class="heading_text">
+                          Project Content
+                        </h2>
+                      </div>
 
-        <!-- Course Details Section - Start
-        ================================================== -->
-        <section class="details_section course_details_section">
-          <div class="container">
-            <div class="row">
-              <div class="col col-lg-8">
-                <div class="section_space_lg pb-lg-0">
-                  <div class="pe-lg-5">
-                    <div class="course_info_card d-lg-none">
-                      <div class="details_image">
-                        <img src="assets/images/course/course_details_image_1.jpg" alt="Collab – Online Learning Platform">
+                      <div id="projectContent"></div>
+  
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col col-lg-4">
+                  <aside class="sidebar">
+                    <div class="course_info_card d-none d-lg-block">
+                      <div class="details_image" id="projectImage2">
                       </div>
-                      <ul class="meta_info_list unordered_list">
-                        <li>
-                          <i class="fas fa-star"></i>
-                          <span>3.5 (3k reviews)</span>
-                        </li>
-                      </ul>
                       <div class="item_price">
-                        <span class="sale_price">Rs 50</span>
+                        <span class="sale_price" id="price2"></span>
                       </div>
-                      <a href="pricing.html" class="btn btn_dark">
-                        <span>
+                      <div id="buy1"></div>
+                      <!-- <a href="pricing.html" class="btn btn_dark"> -->
+                        <!-- <span>
                           <small>Buy Now</small>
                           <small>Buy Now</small>
-                        </span>
+                        </span> -->
                       </a>
-                      <ul class="course_info_list unordered_list_block">
-                        <li>
-                          <span><i class="fas fa-user"></i> Created</span>
-                          <strong>Wendy Chandler</strong>
-                        </li>
-                        
+                      <ul class="course_info_list unordered_list_block">                       
                         <li>
                           <span><i class="fas fa-clock"></i> Duration</span>
-                          <strong>120 Hours</strong>
+                          <strong id="duration2"></strong>
                         </li>
                         <li>
-                          <span><i class="fas fa-video"></i> Projects</span>
-                          <strong>5 Projects</strong>
+                          <span><i class="fas fa-video"></i> Project</span>
+                          <strong id="project2"></strong>
                         </li>
-                       
+                        
                       </ul>
                     </div>
-
-                    <div class="section_heading">
-                      <h2 class="heading_text">
-                        Course Content
-                      </h2>
-                    </div>
-
-                    <div class="accordion_wrap mb-5">
-                      <h3 class="details_info_title mb-3">Section 1. Programming Foundations with JavaScript, HTML and CSS</h3>
-                      <div class="accordion style_2" id="corse_details_accordion">
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_one" aria-expanded="true">
-                            Lesson 1. Course Overview
-                          </div>
-                          <div id="collapse_one" class="accordion-collapse collapse show" data-bs-parent="#corse_details_accordion">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_two" aria-expanded="false">
-                            Lesson 2. Using CodePen. Formatting Text and Nesting Tags
-                          </div>
-                          <div id="collapse_two" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_three" aria-expanded="false">
-                            Lesson 3. Adding Images and Links. Images and Storage
-                          </div>
-                          <div id="collapse_three" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_four" aria-expanded="false">
-                            Lesson 4. CSS Basics. Colors and Names in CSS
-                          </div>
-                          <div id="collapse_four" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="accordion_wrap mb-5">
-                      <h3 class="details_info_title mb-3">Section 2. Algorithms and Programming Concepts</h3>
-                      <div class="accordion style_2" id="corse_details_accordion_2">
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_2_one" aria-expanded="true">
-                            Lesson 1. Developing an Algorithm
-                          </div>
-                          <div id="collapse_2_one" class="accordion-collapse collapse show" data-bs-parent="#corse_details_accordion_2">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_2_two" aria-expanded="false">
-                            Lesson 2. A Step Approach to Solving Programming Problems
-                          </div>
-                          <div id="collapse_2_two" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion_2">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_2_three" aria-expanded="false">
-                            Lesson 3. Thinking Critically about Your Program
-                          </div>
-                          <div id="collapse_2_three" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion_2">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="accordion_wrap mb-5">
-                      <h3 class="details_info_title mb-3">Section 3. MiniProject: Image Filters on the Web</h3>
-                      <div class="accordion style_2" id="corse_details_accordion_3">
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_3_one" aria-expanded="false">
-                            Lesson 1. Developing an Algorithm
-                          </div>
-                          <div id="collapse_3_one" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion_3">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_3_two" aria-expanded="false">
-                            Lesson 2. A Step Approach to Solving Programming Problems
-                          </div>
-                          <div id="collapse_3_two" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion_3">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <div class="checkbox_item accordion_item_checked">
-                            <input type="checkbox">
-                          </div>
-                          <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_3_three" aria-expanded="false">
-                            Lesson 3. Thinking Critically about Your Program
-                          </div>
-                          <div id="collapse_3_three" class="accordion-collapse collapse" data-bs-parent="#corse_details_accordion_3">
-                            <div class="accordion-body">
-                              <p class="mb-3">
-                                Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Nunc mattis enim ut tellus elementum sagittis vitae. Nisi lacus sed viverra tellus in hac. Amet dictum sit amet justo donec enim diam. Morbi non arcu risus quis varius quam quisque id. Mi eget mauris pharetra et ultrices neque.
-                              </p>
-                             
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="comments_list_wrap mb-5">
-                      <div class="section_heading">
-                        <h3 class="heading_text">
-                          Student Feedback
-                        </h3>
-                      </div>
-                      <ul class="comments_list unordered_list_block">
-                        <li>
-                          <div class="comment_item">
-                            <div class="comment_author">
-                              <div class="author_thumbnail">
-                                <img src="assets/images/meta/student_thumbnail_6.jpg" alt="Collab – Online Learning Platform">
-                              </div>
-                              <div class="author_content">
-                                <h4 class="author_name">Carolyn Wallace</h4>
-                                <span class="comment_date">January 27, 2023</span>
-                              </div>
-                            </div>
-                            <p>
-                              Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. Vitae ultricies leo integer malesuada nunc vel. Nibh cras pulvinar mattis nunc sed. Convallis a cras semper auctor neque vitae tempus. Mattis molestie a iaculis at erat pellentesque adipiscing.
-                            </p>
-                         
-                          </div>
-                        
-                            <li>
-                              <div class="comment_item">
-                                <div class="comment_author">
-                                  <div class="author_thumbnail">
-                                    <img src="assets/images/meta/testimonial_thumbnail_1.jpg" alt="Collab – Online Learning Platform">
-                                  </div>
-                                  <div class="author_content">
-                                    <h4 class="author_name">Ray Cooper</h4>
-                                    <span class="comment_date">January 27, 2023</span>
-                                  </div>
-                                </div>
-                                <p>
-                                  Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. Vitae ultricies leo integer malesuada nunc vel. Nibh cras pulvinar mattis nunc sed. Convallis a cras semper auctor neque vitae tempus. Mattis molestie a iaculis at erat pellentesque adipiscing.
-                                </p>
-                               
-                              </div>
-                            </li>
-                          
-                        </li>
-                        <li>
-                          <div class="comment_item">
-                            <div class="comment_author">
-                              <div class="author_thumbnail">
-                                <img src="assets/images/meta/student_thumbnail_7.jpg" alt="Collab – Online Learning Platform">
-                              </div>
-                              <div class="author_content">
-                                <h4 class="author_name">Marrion Willsoriam</h4>
-                                <span class="comment_date">January 27, 2023</span>
-                              </div>
-                            </div>
-                            <p>
-                              Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. Vitae ultricies leo integer malesuada nunc vel. Nibh cras pulvinar mattis nunc sed. Convallis a cras semper auctor neque vitae tempus. Mattis molestie a iaculis at erat pellentesque adipiscing.
-                            </p>
-                        
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-
-             <!--       <div class="comment_form_wrap">
-                      <div class="section_heading">
-                        <h3 class="heading_text">
-                          Leave a Reply
-                        </h3>
-                      </div>
-                      <form action="#">
-                        <div class="row">
-                          <div class="col">
-                            <div class="form_item mb-0">
-                              <label for="input_message" class="input_title text-uppercase">Message</label>
-                              <textarea id="input_message" name="comment" placeholder="Message"></textarea>
-                            </div>
-                          </div>
-                          <div class="col col-md-6">
-                            <div class="form_item mb-0">
-                              <label for="input_name" class="input_title">Name</label>
-                              <input id="input_name" type="text" placeholder="Your Name">
-                            </div>
-                          </div>
-                          <div class="col col-md-6">
-                            <div class="form_item mb-0">
-                              <label for="input_email" class="input_title">Email</label>
-                              <input id="input_email" type="email" placeholder="Your Email">
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="checkbox_item">
-                              <input id="checkbox_remember" type="checkbox">
-                              <label for="checkbox_remember">Save my name, email, and website in this browser for the next time I comment.</label>
-                            </div>
-                            <button type="submit" class="btn btn_dark">
-                              <span>
-                                <small>Submit Comment</small>
-                                <small>Submit Comment</small>
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div> -->
-                  </div>
+  
+                    
+  
+                   
+                  </aside>
                 </div>
               </div>
-
-              <div class="col col-lg-4">
-                <aside class="sidebar">
-                  <div class="course_info_card d-none d-lg-block">
-                    <div class="details_image">
-                      <img src="assets/images/course/course_details_image_1.jpg" alt="Collab – Online Learning Platform">
-                    </div>
-                    <ul class="meta_info_list unordered_list">
-                      <li>
-                        <i class="fas fa-star"></i>
-                        <span>3.5 (3k reviews)</span>
-                      </li>
-                    </ul>
-                    <div class="item_price">
-                      <span class="sale_price">Rs 50</span>
-                    </div>
-                    <a href="pricing.html" class="btn btn_dark">
-                      <span>
-                        <small>Buy Now</small>
-                        <small>Buy Now</small>
-                      </span>
-                    </a>
-                    <ul class="course_info_list unordered_list_block">
-                      <li>
-                        <span><i class="fas fa-user"></i> Created</span>
-                        <strong>Wendy Chandler</strong>
-                      </li>
-                     
-                      <li>
-                        <span><i class="fas fa-clock"></i> Duration</span>
-                        <strong>120 Hours</strong>
-                      </li>
-                      <li>
-                        <span><i class="fas fa-video"></i> Project</span>
-                        <strong>5 Projects</strong>
-                      </li>
-                      
-                    </ul>
-                  </div>
-
-                  
-
-                 
-                </aside>
-              </div>
             </div>
-          </div>
-        </section>
-        <!-- Course Details Section - End
-        ================================================== -->
+          </section>
+      
 
+                  </div>
+                  
+                  
+      
        
 
          <!-- Newslatter Section - Start
@@ -658,6 +354,8 @@
 
     <!-- Custom - Jquery Include -->
     <script src="assets/js/main.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="courseScript.js"></script>
 
   </body>
 </html>

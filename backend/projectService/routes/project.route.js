@@ -11,6 +11,7 @@ router.delete('/:id', projectController.deleteProject);
 
 // Listing and searching
 router.get('/', projectController.getAllProjects);
+router.get('/:projectId', projectController.getProjectById)
 router.get('/paginated', projectController.getProjectsWithPagination);
 router.get('/search', projectController.searchProjects);
 router.get('/images/:key', projectController.streamImage);

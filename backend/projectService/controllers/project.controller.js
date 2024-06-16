@@ -97,6 +97,21 @@ exports.getAllProjects = async (req, res) => {
     }
 };
 
+exports.getProjectById = async (req, res) => {
+    try {
+        const {projectId} = req.params
+        const project = await Project.findById(projectId);
+        console.log('Project: ', project)
+        if (project.imageUrl) {
+            const imageKey = new URL(project.imageUrl).pathname.split('/').pop();
+            project.imageUrl = `${req.protocol}://${req.get('host')}/api/projects/images/${imageKey}`;
+        }
+        res.status(200).send(project);
+    } catch (error) {
+        console.error("Failed to retrieve projects", error);
+        res.status(500).send(error.message);
+    }
+};
 
 // Get projects with pagination
 exports.getProjectsWithPagination = async (req, res) => {
