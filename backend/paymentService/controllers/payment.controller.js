@@ -19,19 +19,23 @@ const s3Client = new AWS.S3({
 });
 
 exports.streamContent = async (req, res) => {
-    const { key } = req.params; 
+    const { paymentId } = req.params; 
+    console.log('Key received: ', paymentId)
     const userEmail = req.query.email;
     const clientIP = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     try {
-        const projectContent = await ProjectContent.findOne({ projectId: key });
+        const paymentDetails = await Payment.findById(paymentId)
+        console.log('PaymentDetails: ', paymentDetails)
+        const projectContent = await ProjectContent.findOne({ projectId: paymentDetails.projectId });
+        console.log('projectContent: ', projectContent)
         if (!projectContent) {
             return res.status(404).send('Project content not found.');
         }
 
         // Update the Payment model with download count and IP
         const updatedPayment = await Payment.findOneAndUpdate(
-            { userEmail: userEmail, projectId: key, paymentStatus: 'success' },
+            { _id: paymentId },
             {
                 $inc: { downloadCount: 1 },
                 $push: { downloadIPs: clientIP }
@@ -46,7 +50,7 @@ exports.streamContent = async (req, res) => {
         // Set up the parameters to get the object from S3
         const downloadParams = {
             Bucket: process.env.S3_BUCKET_NAME,
-            Key: projectContent.downloadLink // Assuming this is the key in the S3 bucket
+            Key: extractS3Key(projectContent.downloadLink) // Assuming this is the key in the S3 bucket
         };
 
         // Set response headers
@@ -95,6 +99,15 @@ exports.createOrder = async (req, res) => {
     }
 };
 
+function extractS3Key(url) {
+    const urlObject = new URL(url);
+    const path = urlObject.pathname;
+
+    // Remove the leading slash if present
+    const key = path.startsWith('/') ? path.substring(1) : path;
+    return key;
+}
+
 // Verify payment
 exports.verifyPayment = async (req, res) => {
     const { orderCreationId, razorpayPaymentId, razorpayOrderId, razorpaySignature, user } = req.body;
@@ -122,15 +135,18 @@ exports.verifyPayment = async (req, res) => {
 
         // Fetch the download link
         const projectContent = await ProjectContent.findOne({ projectId: user.projectId });
-
+        const paymentId = newPayment._id
+        // const key = extractS3Key(projectContent.downloadLink)
+        // const dwnLink = `${req.protocol}://${req.get('host')}/api/payment/stream/${key}`
+        const dwnLink = `${req.protocol}://${req.get('host')}/api/payment/stream/${paymentId}`
         if (projectContent) {
-            await sendDownloadLinkEmail(user.email, projectContent.downloadLink);
+            await sendDownloadLinkEmail(user.email, dwnLink, razorpayPaymentId );
             res.json({
                 msg: 'success',
                 orderId: razorpayOrderId,
                 paymentId: razorpayPaymentId,
                 paymentRecordId: newPayment._id,
-                downloadLink: projectContent.downloadLink
+                downloadLink: dwnLink
             });
         } else {
             res.status(404).send({ message: "Download link not found for this project." });
@@ -150,11 +166,18 @@ exports.sendAllDownloadLinks = async (req, res) => {
         const payments = await Payment.find({ userEmail: userEmail, paymentStatus: 'success' });
 
         // Extract project IDs from payments
-        const projectIds = payments.map(payment => payment.projectId.toString());
+        // const projectIds = payments.map(payment => payment.projectId.toString());
+        const paymentIds = []
+        payments.map(paymentId => {
+            paymentId._id
+            paymentIds.push(paymentId._id.toString())
+            console.log('paymentId: ', paymentId._id.toString())
+        })
+        console.log('paymentIds: ', paymentIds)
 
-        if (projectIds.length > 0) {
+        if (paymentIds.length > 0) {
             // Pass the project IDs to the email function
-            await sendAllDownloadLinksEmail(userEmail, projectIds);
+            await sendAllDownloadLinksEmail(userEmail, paymentIds);
             res.json({ message: "Download links sent successfully!" });
         } else {
             res.status(404).json({ message: "No projects found for this user." });

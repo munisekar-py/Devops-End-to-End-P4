@@ -11,7 +11,7 @@ const ses = new AWS.SES({ apiVersion: '2010-12-01' });
 
 
 
-async function sendDownloadLinkEmail(email, downloadLink) {
+async function sendDownloadLinkEmail(email, downloadLink, razorpayPaymentId) {
     const params = {
         Source: 'noreply@prashantdey.in', 
         Destination: {
@@ -23,7 +23,9 @@ async function sendDownloadLinkEmail(email, downloadLink) {
             },
             Body: {
                 Text: {
-                    Data: `Here is your download link: ${downloadLink}`
+                    Data: `Here is your download link: ${downloadLink}. 
+                    Remember, you can only download it 10 times. So keep the project carefully.
+                    Your Razorpay PaymentId is: ${razorpayPaymentId}.`
                 }
             }
         }
@@ -39,15 +41,24 @@ async function sendDownloadLinkEmail(email, downloadLink) {
 
 
 async function sendAllDownloadLinksEmail(email, projectIds) {
-    
+    // Construct streaming URLs
+    const baseUrl = process.env.DOWNLOAD_URL || "https://api.yourdomain.com";
     const streamLinks = projectIds.map(projectId => {
-        return `${process.env.DOWNLOAD_URL}/api/payment/stream/${projectId}`;
+        return `<tr><td>${projectId}</td><td><a href="${baseUrl}/api/payment/stream/${projectId}">Download</a></td></tr>`;
     });
 
-    const streamLinksText = streamLinks.join('\n');
+    // Join all links into an HTML table
+    const streamLinksTable = `
+        <table border="1" style="width:100%; border-collapse: collapse;">
+            <tr>
+                <th>Project</th>
+                <th>Link</th>
+            </tr>
+            ${streamLinks.join('')}
+        </table>`;
 
     const params = {
-        Source: 'noreply@prashantdey.in', 
+        Source: 'noreply@prashantdey.in',
         Destination: {
             ToAddresses: [email]
         },
@@ -56,8 +67,26 @@ async function sendAllDownloadLinksEmail(email, projectIds) {
                 Data: 'Your Download Links'
             },
             Body: {
-                Text: {
-                    Data: 'Here are your download links:\n\n' + streamLinksText
+                Html: {
+                    Data: `
+                        <html>
+                            <head>
+                                <style>
+                                    table, th, td {
+                                        border: 1px solid black;
+                                        border-collapse: collapse;
+                                    }
+                                    th, td {
+                                        padding: 10px;
+                                        text-align: left;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <h4>Here are your download links:</h4>
+                                ${streamLinksTable}
+                            </body>
+                        </html>`
                 }
             }
         }
@@ -68,8 +97,9 @@ async function sendAllDownloadLinksEmail(email, projectIds) {
         console.log('Email sent successfully');
     } catch (err) {
         console.error('Failed to send email:', err);
-        throw err; 
+        throw err;
     }
 }
+
 
 module.exports = { sendDownloadLinkEmail, sendAllDownloadLinksEmail }
