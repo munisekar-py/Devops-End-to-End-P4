@@ -1,0 +1,14 @@
+[
+    {
+        "projectName": "Ice Cream Instagram Stories",
+        "projectDescription": "Indulge in the sweetest moments with our Ice Cream Instagram Stories! Tempting flavors, vibrant colors, and pure delight await!",
+        "toolsUsed": [
+            "React",
+            "Redux",
+            "Node.js",
+            "Express",
+            "MongoDB"
+        ],
+        "timeToWorkOnProject": 2
+    }
+]
