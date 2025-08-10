@@ -9,6 +9,14 @@ https://github.com/UnpredictablePrashant/TradingGame
 
 ## Project WorkFlow
 
+<img width="920" height="600" alt="WorkFlow" src="https://github.com/user-attachments/assets/648bb08b-c977-481d-a1ab-a93d2bc92c76" />   <img width="900" height="600" alt="TF_WorkFlow" src="https://github.com/user-attachments/assets/4df0b16e-4f9f-4986-bb0c-0f0374d5687c" />
+
+
+
+
+
+
+
 ### End-to-End DevOps CI/CD Communication Flow
 
 **1. Developer Commit (GitHub → Jenkins)**
@@ -45,8 +53,8 @@ https://github.com/UnpredictablePrashant/TradingGame
    * 1. Deployments  
    * 2. Services (LoadBalancer / Ingress)  
    * 3. ConfigMaps, Secrets  
-  **Communication:** Jenkins agent → EKS API via kubectl (authenticated with IAM or kubeconfig).  
-  **Technology:** Kubernetes CLI, AWS EKS.
+ **Communication:** Jenkins agent → EKS API via kubectl (authenticated with IAM or kubeconfig).  
+ **Technology:** Kubernetes CLI, AWS EKS.
 
 **6. Monitoring & Alerts (Prometheus/Grafana → Jenkins & DevOps Team)**
 Prometheus scrapes metrics from:
@@ -55,7 +63,7 @@ Prometheus scrapes metrics from:
   3. AWS CloudWatch metrics  
   Grafana visualizes metrics and sends alerts.  
   Jenkins receives alerts (optional) for failed deployments or infra health issues.  
- **Communication**: Prometheus ↔ Kubernetes API & Node Exporters, Grafana → Email/Slack/Webhook.  
- **Technology**: Prometheus, Grafana, AWS CloudWatch.
+**Communication**: Prometheus ↔ Kubernetes API & Node Exporters, Grafana → Email/Slack/Webhook.  
+**Technology**: Prometheus, Grafana, AWS CloudWatch.
 
  
