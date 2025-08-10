@@ -1,17 +1,19 @@
 # Devops-End-to-End-P4
+
  End-to-End DevOps Pipeline for a Web Application with CI/CD
+  - Project 4 : [https://docs.google.com/document/u/0/d/1jo9L4OSIw1nocKvZF8dFIXP8cq7KjMidgl5KbH7z1UU/mobilebasic?pli=1]
+
 
 Sample Projects 
-https://github.com/UnpredictablePrashant/Slab.ai
-https://github.com/UnpredictablePrashant/TradingGame
+- https://github.com/UnpredictablePrashant/Slab.ai
+- https://github.com/UnpredictablePrashant/TradingGame
+
 
 
 
 ## Project WorkFlow
 
-<img width="920" height="600" alt="WorkFlow" src="https://github.com/user-attachments/assets/648bb08b-c977-481d-a1ab-a93d2bc92c76" />   <img width="900" height="600" alt="TF_WorkFlow" src="https://github.com/user-attachments/assets/4df0b16e-4f9f-4986-bb0c-0f0374d5687c" />
-
-
+<img width="720" height="450" alt="WorkFlow" src="https://github.com/user-attachments/assets/648bb08b-c977-481d-a1ab-a93d2bc92c76" />   <img width="620" height="380" alt="TF_WorkFlow" src="https://github.com/user-attachments/assets/4df0b16e-4f9f-4986-bb0c-0f0374d5687c" />
 
 
 
@@ -28,6 +30,7 @@ https://github.com/UnpredictablePrashant/TradingGame
   * Jenkins pulls latest code from GitHub.
   * Builds Docker image using Dockerfile.
   * Tags the image and pushes it to AWS ECR.
+  * 
   **Communication**: Jenkins agent ↔ Docker Daemon ↔ AWS ECR (via AWS CLI or ECR plugin).
   **Technology**: Docker, AWS CLI, Jenkins Docker Pipeline Plugin.
 
@@ -45,6 +48,7 @@ https://github.com/UnpredictablePrashant/TradingGame
   Jenkins runs Ansible playbooks to:  
     * 1. Install Docker, kubectl, monitoring agents.  
     * 2. Configure Kubernetes node settings.  
+    
    **Communication**: Jenkins agent → Ansible → SSH/API calls to EC2 instances/EKS nodes.  
    **Technology**: Ansible, AWS CLI, SSH.
     
@@ -52,7 +56,8 @@ https://github.com/UnpredictablePrashant/TradingGame
   Jenkins uses kubectl to apply Kubernetes manifests:  
    * 1. Deployments  
    * 2. Services (LoadBalancer / Ingress)  
-   * 3. ConfigMaps, Secrets  
+   * 3. ConfigMaps, Secrets
+     4. 
  **Communication:** Jenkins agent → EKS API via kubectl (authenticated with IAM or kubeconfig).  
  **Technology:** Kubernetes CLI, AWS EKS.
 
@@ -62,7 +67,8 @@ Prometheus scrapes metrics from:
   2. EKS Nodes  
   3. AWS CloudWatch metrics  
   Grafana visualizes metrics and sends alerts.  
-  Jenkins receives alerts (optional) for failed deployments or infra health issues.  
+  Jenkins receives alerts (optional) for failed deployments or infra health issues.
+ 
 **Communication**: Prometheus ↔ Kubernetes API & Node Exporters, Grafana → Email/Slack/Webhook.  
 **Technology**: Prometheus, Grafana, AWS CloudWatch.
 
