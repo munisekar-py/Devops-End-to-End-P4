@@ -31,25 +31,40 @@ exports.streamImage = async (req, res) => {
 
 
 
-// Create a new project
 exports.createProject = async (req, res) => {
   try {
-    const subProjects = req.body.subProjects ? JSON.parse(req.body.subProjects) : [];
-    const projectData = new Project({
-        ...req.body,
-        keyWords: req.body.keyWords.split(',').map(keyword => keyword.trim()), 
-        imageUrl: req.file ? req.file.location : null,
-        noOfSubProjects: subProjects.length,
-        subProjects: subProjects 
+    let subProjects = [];
+    if (Array.isArray(req.body.subProjects)) {
+      subProjects = req.body.subProjects;
+    } else if (typeof req.body.subProjects === 'string' && req.body.subProjects.trim()) {
+      try { subProjects = JSON.parse(req.body.subProjects); } catch (e) { }
+    }
+
+    let keyWords = [];
+    if (Array.isArray(req.body.keyWords)) {
+      keyWords = req.body.keyWords;
+    } else if (typeof req.body.keyWords === 'string') {
+      keyWords = req.body.keyWords.split(',').map(s => s.trim()).filter(Boolean);
+    }
+
+    const project = new Project({
+      projectTitle: req.body.projectTitle,
+      description: req.body.description,
+      imageUrl: req.file ? req.file.location : null,
+      pricing: req.body.pricing,
+      projectDomain: req.body.projectDomain,
+      keyWords,
+      noOfSubProjects: subProjects.length,
+      subProjects
     });
-    console.log('Project Data: ', projectData)
-    const project = new Project(projectData);
+
     await project.save();
-    res.status(201).send(project);
+    return res.status(201).send(project);
   } catch (error) {
-    res.status(400).send(error.message);
+    return res.status(400).send(error.message);
   }
 };
+
 
 // Update an existing project
 exports.updateProject = async (req, res) => {
