@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Devops-End-to-End-P4
 
  End-to-End DevOps Pipeline for a Web Application with CI/CD
@@ -73,3 +74,6 @@ Prometheus scrapes metrics from:
 **Technology**: Prometheus, Grafana, AWS CloudWatch.
 
  
+=======
+# Slab.ai
+>>>>>>> 2880eae (Initial commit)
